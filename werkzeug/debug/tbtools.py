@@ -37,6 +37,12 @@ except NameError:
     pass
 
 
+FAVICON = '''data:image/png;base64,\
+iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAADFBMVEXCHQD///8AAAAAAAARJrhI\
+AAAABHRSTlP//wD//gy7CwAAADRJREFUGJVjYGJiQAJAHgqfAcJlZGREosAMEBNKESWAYQYxgBEK\
+'4Hw0BpJRjEQJYHgO3fsAM3cAUw+IQO0AAAAASUVORK5CYII='''
+
+
 HEADER = u'''\
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
   "http://www.w3.org/TR/html4/loose.dtd">
@@ -48,8 +54,7 @@ HEADER = u'''\
     <!-- We need to make sure this has a favicon so that the debugger does
          not by accident trigger a request to /favicon.ico which might
          change the application state. -->
-    <link rel="shortcut icon"
-        href="?__debugger__=yes&amp;cmd=resource&amp;f=console.png">
+    <link rel="shortcut icon" type="image/png" href="%(favicon)s">
     <script src="?__debugger__=yes&amp;cmd=resource&amp;f=jquery.js"></script>
     <script src="?__debugger__=yes&amp;cmd=resource&amp;f=debugger.js"></script>
     <script type="text/javascript">
@@ -353,6 +358,7 @@ class Traceback(object):
         return PAGE_HTML % {
             'evalex':           evalex and 'true' or 'false',
             'evalex_trusted':   evalex_trusted and 'true' or 'false',
+            'favicon':          FAVICON,
             'console':          'false',
             'title':            exc,
             'exception':        exc,
