@@ -40,7 +40,7 @@ def test_shared_data_middleware(tmpdir):
     app = wsgi.SharedDataMiddleware(null_application, {
         '/':        path.join(path.dirname(__file__), 'res'),
         '/sources': path.join(path.dirname(__file__), 'res'),
-        '/pkg':     ('werkzeug.debug', 'shared'),
+        '/pkg':     ('werkzeug', 'debug'),
         '/foo':     test_dir
     })
 
@@ -52,10 +52,10 @@ def test_shared_data_middleware(tmpdir):
         assert data == b'FOUND'
 
     app_iter, status, headers = run_wsgi_app(
-        app, create_environ('/pkg/debugger.js'))
+        app, create_environ('/pkg/__init__.py'))
     with closing(app_iter) as app_iter:
         contents = b''.join(app_iter)
-    assert b'$(function() {' in contents
+    assert b'werkzeug.debug' in contents
 
     app_iter, status, headers = run_wsgi_app(
         app, create_environ('/missing'))

@@ -200,10 +200,11 @@ def test_import_string_attribute_error(tmpdir, monkeypatch):
 
 
 def test_find_modules():
-    assert list(utils.find_modules('werkzeug.debug')) == [
+    assert set(utils.find_modules('werkzeug.debug')) == set([
         'werkzeug.debug.console', 'werkzeug.debug.repr',
-        'werkzeug.debug.tbtools'
-    ]
+        'werkzeug.debug.tbtools', 'werkzeug.debug._jquery',
+        'werkzeug.debug._resources',
+    ])
 
 
 def test_html_builder():
