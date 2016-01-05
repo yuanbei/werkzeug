@@ -1924,6 +1924,8 @@ class ResponseCacheControl(_CacheControl):
     .. versionadded:: 0.5
        In previous versions a `CacheControl` class existed that was used
        both for request and response.
+
+    Add the stale_while_revalidate support.
     """
 
     public = cache_property('public', None, bool)
@@ -1931,6 +1933,7 @@ class ResponseCacheControl(_CacheControl):
     must_revalidate = cache_property('must-revalidate', None, bool)
     proxy_revalidate = cache_property('proxy-revalidate', None, bool)
     s_maxage = cache_property('s-maxage', None, None)
+    stale_while_revalidate = cache_property('stale-while-revalidate', -1, int)
 
 
 # attach cache_property to the _CacheControl as staticmethod

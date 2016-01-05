@@ -107,6 +107,7 @@ class TestHTTPUtility(object):
         del c.private
         assert c.private is None
         assert c.to_header() == 'no-cache'
+        assert c.stale_while_revalidate == -1
 
     def test_authorization_header(self):
         a = http.parse_authorization_header('Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==')

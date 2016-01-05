@@ -90,6 +90,8 @@ HTTP Related
 
    .. autoattribute:: no_transform
 
+   .. autoattribute:: stale_while_revalidate
+
 .. autoclass:: ETags
    :members:
 
